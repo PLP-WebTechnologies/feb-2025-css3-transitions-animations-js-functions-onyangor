@@ -1,25 +1,24 @@
-// Load saved theme from localStorage
+// Apply saved theme on page load
 window.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.body.className = savedTheme;
     document.getElementById('theme').value = savedTheme;
   });
   
-  // Save theme preference
+  // Save theme change to localStorage
   document.getElementById('theme').addEventListener('change', function() {
     const theme = this.value;
     document.body.className = theme;
     localStorage.setItem('theme', theme);
   });
   
-  // Animate button on click
-  document.getElementById('animateBtn').addEventListener('click', function() {
-    const btn = this;
-    btn.classList.add('animated');
+  // Rocket animation on button click
+  document.getElementById('animateBtn').addEventListener('click', () => {
+    const rocket = document.getElementById('rocket');
   
-    // Remove class after animation ends so it can be re-triggered
-    btn.addEventListener('animationend', () => {
-      btn.classList.remove('animated');
-    }, { once: true });
+    // Reset animation to allow replay
+    rocket.classList.remove('fly');
+    void rocket.offsetWidth; // force reflow
+    rocket.classList.add('fly');
   });
   
